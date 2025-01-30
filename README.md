@@ -1,6 +1,6 @@
 # Hệ thống web bán hàng tích hợp gợi ý sản phẩm dựa trên cảm xúc từ phản hồi của người dùng
 ## Vị trí : FullStack
-- Frontend: HTML, CSS, JAVASCRIPT
+## Frontend: HTML, CSS, JAVASCRIPT
 - Backend: Java ( Springboot )
 - Sentiment Analysis: Python, Tensorflow, Flask
 - Thiết kế RestfulApi, sử dụng hibernate,JPA
