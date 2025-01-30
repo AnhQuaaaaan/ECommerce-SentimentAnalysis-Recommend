@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/70a30c52-d894-4a7d-8b4d-cfc6c6d20bd2)![image](https://github.com/user-attachments/assets/e7817d69-a884-4282-bddd-8ab3e86b8388)![image](https://github.com/user-attachments/assets/6486c152-4e6f-4cb2-9626-bf090fcd49d5)![image](https://github.com/user-attachments/assets/2024e75d-81ab-45b4-a3be-ee037295cf9c)Hệ thống web bán hàng tích hợp gợi ý sản phẩm dựa trên cảm xúc từ phản hồi của người dùng
+Hệ thống web bán hàng tích hợp gợi ý sản phẩm dựa trên cảm xúc từ phản hồi của người dùng
 - Vị trí : FullStack
 - Frontend: HTML, CSS, JAVASCRIPT
 - Backend: JAVA ( Springboot )
