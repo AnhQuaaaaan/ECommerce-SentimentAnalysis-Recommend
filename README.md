@@ -5,9 +5,9 @@
 ### Sentiment Analysis: Python, Tensorflow, Flask
 ### Thiết kế RestfulApi, sử dụng hibernate,JPA
 ### Mô tả : Hệ thống cho phép khách hàng mua hàng online, xem thông tin đơn hàng, đánh giá sản phẩm đã mua, xem các sản phẩm gợi ý phù hợp với đánh giá, sở thích thông qua phản hồi mà khách hàng đánh giá bằng phương pháp lọc cộng tác kết hợp với cảm xúc từ bình luận được đánh giá thông qua mô hình phân tích cảm xúc đã train.
-- Đăng ký
+### Đăng ký
   ![image](https://github.com/user-attachments/assets/94866cb5-efaf-4b16-b523-9fa489ad85de)
-- Đăng nhập
+### Đăng nhập
   ![image](https://github.com/user-attachments/assets/f2904f56-dd26-469b-918e-67f7660abc75)
 - Danh sách sản phẩm
   ![image](https://github.com/user-attachments/assets/1a51d15a-976c-4a30-916e-63a3f00aef26)
