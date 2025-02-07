@@ -27,6 +27,6 @@
   ![image](https://github.com/user-attachments/assets/5a1dfc85-acf4-427b-8d36-2be3b3123f4d)
 ### Gợi ý sản phẩm
   ![image](https://github.com/user-attachments/assets/cbb2ede1-23fe-437b-974b-9dadd41f4f68)
-### Dữ liệu phân tích cảm xúc được lấy từ tập data : https://nijianmo.github.io/amazon/index.html#subsets
+### Dữ liệu để huấn luyện model phân tích cảm xúc được lấy từ tập data : https://nijianmo.github.io/amazon/index.html#subsets
 ### Kết quả huấn luyện phân tích cảm xúc:
   ![image](https://github.com/user-attachments/assets/96c2dce0-2ac0-4dd5-925d-885ce7ce4048)
