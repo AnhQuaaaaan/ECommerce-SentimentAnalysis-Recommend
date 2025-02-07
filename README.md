@@ -28,5 +28,5 @@
 ### Gợi ý sản phẩm
   ![image](https://github.com/user-attachments/assets/cbb2ede1-23fe-437b-974b-9dadd41f4f68)
 ### Dữ liệu để huấn luyện model phân tích cảm xúc được lấy từ tập data : https://nijianmo.github.io/amazon/index.html#subsets
-### Kết quả huấn luyện phân tích cảm xúc:
+### Kết quả huấn luyện phân tích cảm xúc cho phân loại 5 lớp ( từ 1-5 ) tương ứng với 5 đầu ra cảm xúc:
   ![image](https://github.com/user-attachments/assets/96c2dce0-2ac0-4dd5-925d-885ce7ce4048)
