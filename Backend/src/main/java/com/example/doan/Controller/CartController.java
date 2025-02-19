@@ -1,12 +1,10 @@
 package com.example.doan.Controller;
 
 import com.example.doan.Dto.CartDto;
-import com.example.doan.Dto.CartItemsDto;
-import com.example.doan.Dto.CustomerDto;
-import com.example.doan.Dto.OrderDto;
-import com.example.doan.Entity.Cart;
 import com.example.doan.Service.CartService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 @RequestMapping("/api/cart")
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CartController {
-    @Autowired
-    private CartService cartService;
+    CartService cartService;
     @PostMapping("/{productId}")
     public ResponseEntity<?> addToCart(@RequestBody CartDto cartDto, @PathVariable String productId) {
         try {

@@ -4,7 +4,9 @@ import com.example.doan.Dto.CartItemsDto;
 import com.example.doan.Dto.OrderDto;
 import com.example.doan.Service.CartItemsService;
 import com.example.doan.Service.CartService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +18,9 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/api/cartItems")
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CartItemsController {
-    @Autowired
-    private CartItemsService cartItemsService;
+    CartItemsService cartItemsService;
     @GetMapping("/customer/{customerId}")
     public ResponseEntity<?> getCartItemsbyCustomer(@PathVariable String customerId) {
         try {

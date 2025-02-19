@@ -23,7 +23,7 @@ public class Review {
     private int sentimentScore;
     @ManyToOne
     @JoinColumn(name = "customer_id",nullable = false)
-    private Customer customer;
+    private User customer;
     @ManyToOne
     @JoinColumn(name = "product_id",nullable = false)
     private Product product;

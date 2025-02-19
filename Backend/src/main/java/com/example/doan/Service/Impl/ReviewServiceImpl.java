@@ -6,6 +6,9 @@ import com.example.doan.Entity.Product;
 import com.example.doan.Entity.Review;
 import com.example.doan.Repository.ReviewRepository;
 import com.example.doan.Service.ReviewService;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -21,9 +24,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
-    @Autowired
-    private ReviewRepository reviewRepository;
+    private final ReviewRepository reviewRepository;
     @Value("${sentiment.api.url}")
     private String sentimentApiUrl;
     @Override

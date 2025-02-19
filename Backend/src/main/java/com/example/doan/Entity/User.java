@@ -1,5 +1,6 @@
 package com.example.doan.Entity;
 
+import com.example.doan.Entity.num.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,16 +10,19 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "`customer`")
-public class Customer {
+@Table(name = "`user`")
+public class User {
     @Id
     private String id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
     @Column(nullable = false)
     private String email;
 

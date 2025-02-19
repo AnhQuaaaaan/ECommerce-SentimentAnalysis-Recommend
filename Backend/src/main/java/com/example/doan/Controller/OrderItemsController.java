@@ -4,7 +4,9 @@ import com.example.doan.Dto.OrderDto;
 import com.example.doan.Dto.OrderItemsDto;
 import com.example.doan.Service.OrderItemsService;
 import com.example.doan.Service.OrderService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 @RequestMapping("/api/orderItems")
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class OrderItemsController {
-    @Autowired
-    private OrderItemsService orderItemsService;
+    OrderItemsService orderItemsService;
     @PostMapping
     public ResponseEntity<?> save(@RequestBody OrderItemsDto orderItemsDto) {
         try {

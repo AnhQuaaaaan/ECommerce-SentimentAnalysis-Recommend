@@ -1,4 +1,5 @@
 let sp;
+let token = localStorage.getItem("token");
 document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get("id");
@@ -230,7 +231,8 @@ async function submitReview(event) {
         const response = await fetch("http://localhost:8080/api/review", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(reviewData)
         });
@@ -306,10 +308,10 @@ async function addToCart() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(requestBody),
         });
-
         if (response.ok) {
             updateCartCount();
             animationCart();
@@ -320,34 +322,28 @@ async function addToCart() {
         console.error('Lỗi khi gọi API:', error);
     }
 }
-
-async function updateCartCount() {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const userId = user?.id;
-
-    if (!userId) {
-        console.error('User ID không tồn tại trong localStorage.');
-        return;
-    }
+async function updateTotalPrice() {
     try {
-        const response = await fetch(`http://localhost:8080/api/cartItems/customer/${userId}`);
+        const response = await fetch('http://localhost:8080/api/cartItems/customer/A9MHZQO27LL00V');
         if (!response.ok) {
             console.error('Lỗi khi lấy dữ liệu giỏ hàng:', await response.text());
             return;
         }
 
         const cart = await response.json();
-        const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-        const countElement = document.querySelector('.count-product-cart');
-        if (countElement) {
-            countElement.textContent = totalQuantity;
+        const roundedTotalPrice = totalPrice.toFixed(2);
+
+        const totalPriceElement = document.querySelector('.cart-total-price .text-price');
+        if (totalPriceElement) {
+            totalPriceElement.textContent = roundedTotalPrice + '$';
         }
+        updateCartCount();
     } catch (error) {
-        console.error('Lỗi khi gọi API để cập nhật số lượng:', error);
+        console.error('Lỗi khi cập nhật tổng giá:', error);
     }
 }
-
 function animationCart() {
     const countElement = document.querySelector(".count-product-cart");
     if (countElement) {

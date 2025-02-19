@@ -19,7 +19,7 @@ public class Order {
     private float totalAmount;
     @ManyToOne
     @JoinColumn(name = "customer_id",nullable = false)
-    private Customer customerorder;
+    private User customerorder;
     @Column(nullable = false)
     private String customerName;
     @Column(nullable = false)

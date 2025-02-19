@@ -3,7 +3,9 @@ package com.example.doan.Controller;
 import com.example.doan.Dto.ProductDto;
 import com.example.doan.Dto.ReviewDto;
 import com.example.doan.Service.ReviewService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -16,9 +18,9 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/api/review")
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ReviewController {
-    @Autowired
-    private ReviewService reviewService;
+    ReviewService reviewService;
     @GetMapping("/{id}")
     public ResponseEntity<?> getReviewsByProduct(@PathVariable String id) {
         try {

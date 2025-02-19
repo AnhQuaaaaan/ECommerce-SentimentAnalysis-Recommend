@@ -15,5 +15,5 @@ public class Cart {
 
     @OneToOne
     @JoinColumn(name = "customerId", nullable = false)
-    private Customer customer;
+    private User customer;
 }

@@ -1,3 +1,4 @@
+let token = localStorage.getItem("token");
 document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     let currentPage = parseInt(urlParams.get("page")) || 0;
@@ -25,7 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function fetchOrders() {
         try {
-            const response = await fetch(apiUrl);
+            const response = await fetch(apiUrl, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
             if (!response.ok) {
                 throw new Error("Failed to fetch orders");
             }
@@ -48,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .map(order => `
                 <div class="order-card">
                     <h3>Mã đơn hàng: ${order.id}</h3>
-                    <p>Ngày đặt hàng: ${new Date(order.orderDate).toLocaleDateString()}</p>
+                    <p>Ngày đặt hàng: ${new Date(order.orderDate).toLocaleDateString('vi-VN')}</p>
                     <p>Tổng tiền: ${order.totalAmount.toLocaleString()} $</p>
                     <p class="order-status">Ghi chú: ${order.note || "Không có ghi chú"}</p>
                     <button class="view-details-btn" onclick="viewOrderDetails('${order.id}')">Xem chi tiết</button>

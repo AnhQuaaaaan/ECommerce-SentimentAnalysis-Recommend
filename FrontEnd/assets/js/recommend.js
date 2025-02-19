@@ -1,3 +1,4 @@
+let token = localStorage.getItem("token");
 document.addEventListener("DOMContentLoaded", () => {
     const dndk = document.querySelector(".text-dndk");
     const tk = document.querySelector(".text-tk");
@@ -19,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "index.html";
         });
     }
-
     let id = user.id;
     const apiUrl = `http://localhost:8080/api/product/recommendation/${id}`;
 
@@ -27,7 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             loadingPopup.style.display = "flex";
 
-            const response = await fetch(`${apiUrl}`);
+            const response = await fetch(`${apiUrl}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -70,10 +72,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function productdetails(productId) {
     window.location.href = `productDetails.html?id=${productId}`;
-}
-function updateCartCount() {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const uniqueProductIds = new Set(cart.map(item => item.id));
-    const uniqueProductCount = uniqueProductIds.size;
-    document.querySelector('.count-product-cart').textContent = uniqueProductCount;
 }

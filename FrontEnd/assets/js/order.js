@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     displayDeliveryDate();
     loadUsser()
 })
+let token = localStorage.getItem("token");
 function displayDeliveryDate() {
     const today = new Date();
 
@@ -37,7 +38,9 @@ async function loadOrder() {
     let totalQuantity = 0;
 
     try {
-        const response = await fetch(`http://localhost:8080/api/cartItems/customer/${userId}`);
+        const response = await fetch(`http://localhost:8080/api/cartItems/customer/${userId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
         if (!response.ok) {
             console.error('Failed to fetch cart items:', await response.text());
             return;
@@ -142,6 +145,7 @@ async function createOrder() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(orderData)
         });
@@ -179,7 +183,8 @@ async function sendProductDataToBackend() {
         const response = await fetch("http://localhost:8080/api/order/send-product-data", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(payload)
         });

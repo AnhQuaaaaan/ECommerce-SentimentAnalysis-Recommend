@@ -4,6 +4,9 @@ import com.example.doan.Dto.ProductDto;
 import com.example.doan.Entity.Product;
 import com.example.doan.Repository.ProductRepository;
 import com.example.doan.Service.ProductService;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,9 +20,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ProductServiceImpl implements ProductService {
-    @Autowired
-    private ProductRepository productRepository;
+    ProductRepository productRepository;
     @Override
     public Page<ProductDto> getAllProducts(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);

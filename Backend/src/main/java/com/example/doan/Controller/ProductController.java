@@ -1,10 +1,10 @@
 package com.example.doan.Controller;
 
-import com.example.doan.Dto.CustomerDto;
 import com.example.doan.Dto.ProductDto;
-import com.example.doan.Service.CustomerService;
 import com.example.doan.Service.ProductService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -17,9 +17,9 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/api/product")
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ProductController {
-    @Autowired
-    private ProductService productService;
+    ProductService productService;
     @GetMapping
     public ResponseEntity<?> getAllProduct(@RequestParam(defaultValue = "0") int page,
                                            @RequestParam(defaultValue = "20") int size) {

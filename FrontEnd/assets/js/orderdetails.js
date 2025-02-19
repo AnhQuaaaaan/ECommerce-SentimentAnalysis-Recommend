@@ -1,3 +1,4 @@
+let token = localStorage.getItem("token");
 document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get("id");
@@ -33,7 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function fetchOrderDetails() {
         try {
-            const response = await fetch(orderApi);
+            const response = await fetch(orderApi, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
             if (!response.ok) throw new Error("Không thể tải chi tiết đơn hàng.");
             const order = await response.json();
             displayOrderDetails(order);
@@ -45,7 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function fetchOrderItems() {
         try {
-            const response = await fetch(orderItemsApi);
+            const response = await fetch(orderItemsApi, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
             if (!response.ok) throw new Error("Không thể tải sản phẩm trong đơn hàng.");
             const items = await response.json();
             displayOrderItems(items);
@@ -123,7 +128,9 @@ function viewOrderDetails(orderId) {
 function showReviewForm(productId, orderItemId) {
     const productApi = `http://localhost:8080/api/product/${productId}`;
 
-    fetch(productApi)
+    fetch(productApi, {
+        headers: { 'Authorization': `Bearer ${token}` }
+    })
         .then(response => response.json())
         .then(product => {
             const reviewFormContainer = document.getElementById('review-form-container');
@@ -205,7 +212,8 @@ async function submitReview(event, productId, orderItemid) {
         const response = await fetch("http://localhost:8080/api/review", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(reviewData)
         });
@@ -256,7 +264,8 @@ async function updateOrderItems(orderItemid) {
         const response = await fetch("http://localhost:8080/api/orderItems", {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(orderItemData)
         });

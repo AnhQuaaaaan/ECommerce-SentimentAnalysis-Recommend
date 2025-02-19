@@ -19,7 +19,7 @@ async function handleLogin(event) {
     };
 
     try {
-        const response = await fetch('http://localhost:8080/api/auth/login', {
+        const response = await fetch('http://localhost:8080/api/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -32,8 +32,9 @@ async function handleLogin(event) {
             err.style.visibility = 'visible';
             return;
         }
-        let result = await response.json();
-        localStorage.setItem('user', JSON.stringify(result));
+        const result = await response.json();
+        localStorage.setItem('token', result.accessToken);
+        localStorage.setItem('user', JSON.stringify(result.user));
         window.location.href = '/FrontEnd/index.html';
     } catch (error) {
         console.log(error)
@@ -69,7 +70,7 @@ async function handleRegister(event) {
     };
 
     try {
-        const response = await fetch('http://localhost:8080/api/auth/register', {
+        const response = await fetch('http://localhost:8080/api/user/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

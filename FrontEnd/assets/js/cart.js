@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     updateCartCount()
 })
+let token1 = localStorage.getItem('token');
 function openCart() {
     renderCart()
     document.querySelector('.modal-cart').classList.add('open');
@@ -12,12 +13,13 @@ function closeCart() {
 async function updateCartCount() {
     const user = JSON.parse(localStorage.getItem('user'));
     const userId = user?.id;
-
     if (!userId) {
         return;
     }
     try {
-        const response = await fetch(`http://localhost:8080/api/cartItems/customer/${userId}`);
+        const response = await fetch(`http://localhost:8080/api/cartItems/customer/${userId}`, {
+            headers: { 'Authorization': `Bearer ${token1}` }
+        });
         if (!response.ok) {
             console.error('Lỗi khi lấy dữ liệu giỏ hàng:', await response.text());
             return;
@@ -48,7 +50,9 @@ async function renderCart() {
     const cartTotalPrice = document.querySelector('.cart-total-price .text-price');
 
     try {
-        const response = await fetch(`http://localhost:8080/api/cartItems/customer/${userId}`);
+        const response = await fetch(`http://localhost:8080/api/cartItems/customer/${userId}`, {
+            headers: { 'Authorization': `Bearer ${token1}` }
+        });
         if (!response.ok) {
             console.error('Không thể lấy dữ liệu giỏ hàng:', await response.text());
             return;
@@ -117,6 +121,7 @@ async function removeItemFromCart(itemId) {
     try {
         const response = await fetch(`http://localhost:8080/api/cartItems/${itemId}`, {
             method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token1}` }
         });
 
         if (!response.ok) {
@@ -135,7 +140,10 @@ async function increaseQuantity(itemId, quantity1) {
     try {
         const response = await fetch('http://localhost:8080/api/cartItems', {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token1}`
+            },
             body: JSON.stringify({
                 id: itemId,
                 quantity: a
@@ -168,7 +176,10 @@ async function decreaseQuantity(itemId, quantity1) {
     try {
         const response = await fetch('http://localhost:8080/api/cartItems', {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token1}`
+            },
             body: JSON.stringify({
                 id: itemId,
                 quantity: newQuantity
@@ -194,7 +205,9 @@ async function decreaseQuantity(itemId, quantity1) {
 
 async function updateTotalPrice() {
     try {
-        const response = await fetch('http://localhost:8080/api/cartItems/customer/A9MHZQO27LL00V');
+        const response = await fetch('http://localhost:8080/api/cartItems/customer/A9MHZQO27LL00V', {
+            headers: { 'Authorization': `Bearer ${token1}` }
+        });
         if (!response.ok) {
             console.error('Lỗi khi lấy dữ liệu giỏ hàng:', await response.text());
             return;

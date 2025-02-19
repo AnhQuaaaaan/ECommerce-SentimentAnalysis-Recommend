@@ -8,6 +8,9 @@ import com.example.doan.Repository.CartRepository;
 import com.example.doan.Repository.OrderItemsRepository;
 import com.example.doan.Repository.OrderRepository;
 import com.example.doan.Service.OrderService;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,15 +21,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class OrderServiceImpl implements OrderService {
-    @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
-    private CartItemsRepository cartItemsRepository;
-    @Autowired
-    private CartRepository cartRepository;
-    @Autowired
-    private OrderItemsRepository orderItemsRepository;
+    OrderRepository orderRepository;
+    CartItemsRepository cartItemsRepository;
+    CartRepository cartRepository;
+    OrderItemsRepository orderItemsRepository;
     @Override
     public OrderDto create(OrderDto orderDto) {
         Order order=convertToOrder(orderDto);

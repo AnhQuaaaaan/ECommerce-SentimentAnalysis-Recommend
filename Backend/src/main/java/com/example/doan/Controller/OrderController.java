@@ -3,7 +3,9 @@ package com.example.doan.Controller;
 import com.example.doan.Dto.OrderDto;
 import com.example.doan.Dto.ProductDto;
 import com.example.doan.Service.OrderService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -14,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 @RequestMapping("/api/order")
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class OrderController {
-    @Autowired
-    private OrderService orderService;
+    OrderService orderService;
     @GetMapping("/customer/{id}")
     public ResponseEntity<?> getOrderByCustomer(@RequestParam(defaultValue = "0") int page,
                                            @RequestParam(defaultValue = "12") int size, @PathVariable String id) {

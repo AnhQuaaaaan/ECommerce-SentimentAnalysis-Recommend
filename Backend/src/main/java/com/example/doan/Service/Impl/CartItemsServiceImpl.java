@@ -6,6 +6,9 @@ import com.example.doan.Entity.CartItems;
 import com.example.doan.Repository.CartItemsRepository;
 import com.example.doan.Repository.CartRepository;
 import com.example.doan.Service.CartItemsService;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +16,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CartItemsServiceImpl implements CartItemsService {
-    @Autowired
-    private CartItemsRepository cartItemsRepository;
-    @Autowired
-    private CartRepository cartRepository;
+    CartItemsRepository cartItemsRepository;
+    CartRepository cartRepository;
     @Override
     public List<CartItemsDto> getCartItemsbyCustomer(String customerId) {
         Cart cart= cartRepository.findCartByCustomer_Id(customerId);
