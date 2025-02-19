@@ -4,6 +4,7 @@
 ### Backend: Java ( Springboot )
 ### Sentiment Analysis: Python, Tensorflow, Flask
 ### Thiết kế RestfulApi, sử dụng hibernate,JPA
+### Triển khai phân quyền, xác thực bằng Spring Security, JWT
 ##
 ## Mô tả : Hệ thống cho phép khách hàng mua hàng online, xem thông tin đơn hàng, đánh giá sản phẩm đã mua, xem các sản phẩm gợi ý phù hợp với đánh giá, sở thích thông qua phản hồi mà khách hàng đánh giá bằng phương pháp lọc cộng tác kết hợp với cảm xúc từ bình luận được đánh giá thông qua mô hình phân tích cảm xúc đã train.
 ### Đăng ký
