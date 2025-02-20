@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,42 +31,10 @@ import java.util.Map;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserController {
     UserService userService;
-    AuthenticationManager authenticationManager;
-    JwtUtils jwtUtils;
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody JwtRequest jwtRequest) {
-        try{
-            Authentication authentication= authenticate(jwtRequest.getUsername(),jwtRequest.getPassword());
-            if (authentication != null && authentication.isAuthenticated()) {
-                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-                UserDto userDto=userService.findUserByUserName(userDetails.getUsername());
-                String token = jwtUtils.generateToken(userDetails);
-                Map<String, Object> responseBody = new HashMap<>();
-                responseBody.put("accessToken", token);
-                responseBody.put("user", userDto);
-                HttpHeaders headers = new HttpHeaders();
-                return new ResponseEntity<>(responseBody, headers, HttpStatus.OK);
-            } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-            }
-        }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
-        }
-    }
-    private Authentication authenticate(String username, String password) throws Exception {
-        try {
-            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        } catch (BadCredentialsException e) {
-            throw new Exception("Invalid credentials", e);
-        } catch (Exception e) {
-            throw new Exception("Authentication failed", e);
-        }
-    }
-    @PostMapping("/register")
-    public ResponseEntity<?> Register(@RequestBody UserDto userDto){
-        if (userService.register(userDto)){
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Tài khoản đã tồn tại");
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/info/{id}")
+    public ResponseEntity<?> Register(@PathVariable String id){
+        UserDto userDto=userService.getUserById(id);
+        return ResponseEntity.ok(userDto);
     }
 }

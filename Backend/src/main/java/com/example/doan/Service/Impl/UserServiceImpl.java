@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -44,11 +45,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return convertToUserDto(user);
     }
 
+    @Override
+    public UserDto getUserById(String id) {
+        Optional<User> userOptional=userRepository.findById(id);
+        User user=userOptional.get();
+        return convertToUserDto(user);
+    }
+
     public UserDto convertToUserDto(User user){
         UserDto userDto=new UserDto();
         userDto.setId(user.getId());
         userDto.setDob(user.getDob());
         userDto.setPhone(user.getPhone());
+        userDto.setRole(user.getRole());
         userDto.setAddress(user.getAddress());
         userDto.setEmail(user.getEmail());
         userDto.setFullname(user.getFullname());

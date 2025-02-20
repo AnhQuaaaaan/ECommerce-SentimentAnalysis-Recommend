@@ -10,6 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -21,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-
+@EnableMethodSecurity
 public class SecurityConfig {
     @Autowired
     private JwtEntryPoint jwtEntryPoint;
@@ -40,7 +41,7 @@ public class SecurityConfig {
         httpSecurity.cors();
         httpSecurity.csrf().disable()
                 .authorizeRequests()
-                .requestMatchers("/api/user/**").permitAll()
+                .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers(HttpMethod.GET,"/api/product/**","/api/review/**").permitAll()
                 .requestMatchers("/api/cart/**","/api/cartItems/**","/api/order/**","/api/orderItems/**","/api/review/**","/api/product/**").hasRole("USER")
                 .anyRequest().authenticated()
