@@ -44,6 +44,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers(HttpMethod.GET,"/api/product/**","/api/review/**").permitAll()
                 .requestMatchers("/api/cart/**","/api/cartItems/**","/api/order/**","/api/orderItems/**","/api/review/**","/api/product/**").hasRole("USER")
+                .requestMatchers("/api/user/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtEntryPoint).and().sessionManagement()

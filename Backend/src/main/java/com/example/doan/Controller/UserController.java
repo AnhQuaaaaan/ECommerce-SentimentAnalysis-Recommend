@@ -31,7 +31,6 @@ import java.util.Map;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserController {
     UserService userService;
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/info/{id}")
     public ResponseEntity<?> Register(@PathVariable String id){
         UserDto userDto=userService.getUserById(id);
